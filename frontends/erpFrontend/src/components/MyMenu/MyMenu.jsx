@@ -28,7 +28,7 @@ const menulist = [
 
 export default function MyMenu({ collapse }) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', marginRight: '10px' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', marginRight: '30px' }}>
       {menulist.map((item) => (
         <MyMenuItem caption={item.caption} icon={item.icon} collapse={collapse} link={item.link} />
       ))}
