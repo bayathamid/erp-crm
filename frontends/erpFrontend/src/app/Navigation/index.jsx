@@ -18,6 +18,7 @@ import {
   CreditCardOutlined,
   BankOutlined,
 } from '@ant-design/icons';
+import MyMenu from '@/components/MyMenu/MyMenu';
 
 const { Sider } = Layout;
 const { SubMenu } = Menu;
@@ -27,6 +28,7 @@ export default function Navigation() {
   const { isNavMenuClose } = stateApp;
   const { navMenu } = appContextAction;
   const [showLogoApp, setLogoApp] = useState(isNavMenuClose);
+  const [collapseMenu, setCollapseMenu] = useState(false);
 
   useEffect(() => {
     if (isNavMenuClose) {
@@ -39,13 +41,33 @@ export default function Navigation() {
     }, 200);
     return () => clearTimeout(timer);
   }, [isNavMenuClose]);
+
+  function doCollapseMenu() {
+    const c = !collapseMenu;
+    if (!c)
+      setTimeout(function () {
+        setCollapseMenu(c);
+      }, 200);
+    else {
+      setCollapseMenu(c);
+    }
+    console.log('mymenu collapse called...');
+  }
+
   const onCollapse = () => {
     navMenu.collapse();
+    doCollapseMenu();
   };
 
   return (
     <>
-      <Sider collapsible collapsed={isNavMenuClose} onCollapse={onCollapse} className="navigation">
+      <Sider
+        collapsible
+        collapsed={isNavMenuClose}
+        onCollapse={onCollapse}
+        className="navigation"
+        reverseArrow={true}
+      >
         <div className="logo">
           <img
             src={logoIcon}
@@ -57,7 +79,8 @@ export default function Navigation() {
             <img src={logoText} alt="Logo" style={{ marginTop: '3px', marginLeft: '10px' }} />
           )}
         </div>
-        <Menu mode="inline">
+        <MyMenu collapse={collapseMenu} />
+        {/*         <Menu mode="inline">
           <Menu.Item key={'Dashboard'} icon={<DashboardOutlined />}>
             <Link to={'/'} />
             Dashboard
@@ -96,7 +119,7 @@ export default function Navigation() {
               Role
             </Menu.Item>
           </SubMenu>
-        </Menu>
+        </Menu> */}
       </Sider>
     </>
   );

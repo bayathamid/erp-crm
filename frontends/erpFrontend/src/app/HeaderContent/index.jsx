@@ -73,16 +73,16 @@ export default function HeaderContent() {
     </div>
   );
   return (
-    <div className="headerIcon" style={{ position: 'absolute', right: 0, zIndex: '99' }}>
+    <div className="headerIcon" style={{ position: 'absolute', left: 0, zIndex: '99' }}>
+      <Avatar icon={<BellOutlined />} />
+
+      <Avatar icon={<AppstoreOutlined />} />
+
       <Dropdown overlay={profileDropdown} trigger={['click']} placement="bottomRight">
         {/* <Badge dot> */}
         <Avatar className="last" src={photo} />
         {/* </Badge> */}
       </Dropdown>
-
-      <Avatar icon={<AppstoreOutlined />} />
-
-      <Avatar icon={<BellOutlined />} />
     </div>
   );
 }
